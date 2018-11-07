@@ -1,34 +1,21 @@
-import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux';
+import { fetchDefinition } from './redux/actions/dictionary.A';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {name: ''};
-  }
+import MainForm from './MainForm';
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-  });
-  }
+const mapStateToProps = state => {
+  return {
+    dictionary: state.dictionary,
+  };
+};
 
-  render() {
-    return (
-      <div className="App">
-      hey
+const mapDispatchToProps = {
+  fetchDefinition,
+};
 
-              <TextField
-              id="outlined-name"
-              label="Name"
-              value={this.state.name}
-              onChange={this.handleChange('name')}
-              margin="normal"
-              variant="outlined"
-            />
-                  </div>
-    );
-  }
-}
+const App = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainForm);
 
 export default App;
