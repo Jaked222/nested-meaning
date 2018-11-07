@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import TextField from '@material-ui/core/TextField';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {name: ''};
+  }
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+  });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      hey
+
+              <TextField
+              id="outlined-name"
+              label="Name"
+              value={this.state.name}
+              onChange={this.handleChange('name')}
+              margin="normal"
+              variant="outlined"
+            />
+                  </div>
     );
   }
 }
