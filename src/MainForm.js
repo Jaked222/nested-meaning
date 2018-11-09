@@ -13,19 +13,27 @@ class MainForm extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    const dictionaryState = this.props.dictionary[0];
+    const previousDictionaryState = prevProps.dictionary[0];
+
     if (
-      (this.props.dictionary[0] &&
-        prevProps.dictionary[0] &&
-        this.props.dictionary[0].shortdef[0] !==
-          prevProps.dictionary[0].shortdef[0]) ||
-      (this.props.dictionary[0] && !prevProps.dictionary[0])
+      (dictionaryState &&
+        previousDictionaryState &&
+        dictionaryState.shortdef[0] !==
+        previousDictionaryState.shortdef[0]) ||
+      (dictionaryState && !previousDictionaryState)
     ) {
       const definition = this.props.dictionary[0].shortdef[0];
       let wordsInDefinition = definition.split(" ");
+      const filteredWordsInDefinition = wordsInDefinition.filter(word => {
+        return !this.state.wordList.includes(word);
+      });
+
       console.error("recieved definition:", definition);
       console.error("wordsInDefinition:", wordsInDefinition);
-      console.error("new wordlist:", this.state.wordList.concat(wordsInDefinition));
-      this.setState({ wordList: this.state.wordList.concat(wordsInDefinition) });
+      console.error("filteredWordsInDefinition:", filteredWordsInDefinition);
+      console.error("new wordlist:", this.state.wordList.concat(filteredWordsInDefinition));
+      this.setState({ wordList: this.state.wordList.concat(filteredWordsInDefinition) });
     }
   }
 
@@ -43,7 +51,6 @@ class MainForm extends Component {
   }
 
   render() {
-    console.error(this.state.wordList, this.state.wordList.length);
     const showLoadBar =
       this.state.wordList.length > 0 && this.state.submitClicked;
 
