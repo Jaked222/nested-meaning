@@ -1,6 +1,6 @@
 
 // key for https://dictionaryapi.com/
-const API_KEY = 'null'
+const API_KEY = 'dc94651e-f5ee-4986-80a5-588dcb4bc932'
 
 export const fetchDefinition = (word) => {
   return dispatch => {
